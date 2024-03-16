@@ -29,7 +29,6 @@ class Logical extends Controller
 
         $isAnagram = $sorted_word1 === $sorted_word2;
 
-        // Kembalikan view dengan menyertakan variabel $isAnagram
         return view('logicaltest')->with('isAnagram', $isAnagram);
     }
 }

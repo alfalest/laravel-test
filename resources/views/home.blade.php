@@ -16,6 +16,7 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <title>Laravel Testing</title>
 </head>
 
@@ -36,9 +37,6 @@
                                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/edit-data">Edit Data</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="/logical-test" target="_blank">Logical Test</a>
                             </li>
                         </ul>
@@ -55,16 +53,15 @@
                         <th scope="col">Nama Barang</th>
                         <th scope="col">Harga Barang</th>
                         <th scope="col">Aksi</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     @php
                         $counter = 1;
                     @endphp
-                    @foreach ($item as $i)
+                    @forelse ($item as $i)
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">{{ $counter++ }}</th>
                             <td>{{ $i->nama_barang }}</td>
                             <td>Rp {{ number_format($i->harga_barang, 0, ',', '.') }}</td>
                             <td>
@@ -81,18 +78,29 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4">Data tidak tersedia</td>
+                        </tr>
+                    @endforelse
                 </tbody>
+
             </table>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         @if (session('success'))
             Swal.fire({
                 title: 'Success!',
                 text: '{{ session('success') }}',
                 icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @elseif (session('error'))
+            Swal.fire({
+                title: 'Error!',
+                text: '{{ session('error') }}',
+                icon: 'error',
                 confirmButtonText: 'OK'
             });
         @endif

@@ -16,6 +16,7 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <title>Laravel Testing</title>
 </head>
 
@@ -36,9 +37,6 @@
                                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/edit-data">Edit Data</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="/logical-test" target="_blank">Logical Test</a>
                             </li>
                         </ul>
@@ -53,13 +51,18 @@
                 <div class="mb-3">
                     <label for="nama_barang" class="form-label">Nama Barang</label>
                     <input type="text" class="form-control" name="nama_barang" placeholder="Isi nama barang"
-                        value="{{ $item->nama_barang }}">
+                        value="{{ old('nama_barang', $item->nama_barang) }}">
+                    @error('nama_barang')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="harga_barang" class="form-label">Password</label>
+                    <label for="harga_barang" class="form-label">Harga Barang</label>
                     <input type="number" class="form-control" name="harga_barang" placeholder="Isi harga"
-                        value="{{ $item->harga_barang }}">
-
+                        value="{{ old('harga_barang', $item->harga_barang) }}">
+                    @error('harga_barang')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-outline-dark text-center">Simpan Data</button>
             </form>
@@ -75,13 +78,8 @@
                 confirmButtonText: 'OK'
             });
         @endif
-
-        $(document).ready(function() {
-            $('#harga_barang').on('input', function() {
-                $(this).val($(this).val().replace(/[^\d]/, ''));
-            });
-        });
     </script>
 </body>
+
 
 </html>

@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $item = HomeModel::all();
@@ -21,26 +18,23 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_barang' => 'required|string|max:255',
             'harga_barang' => 'required|numeric',
+        ], [
+            'nama_barang.required' => 'Nama barang harus diisi',
+            'harga_barang.required' => 'Harga barang harus diisi',
         ]);
 
         if ($validator->fails()) {
-            return redirect('tambah-menu')
+            return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -52,12 +46,9 @@ class HomeController extends Controller
 
         $items->save();
 
-        return redirect('/tambah-data')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Barang berhasil ditambahkan');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $item = HomeModel::find($id);
@@ -92,23 +83,19 @@ class HomeController extends Controller
 
             return redirect('/')->with('success', 'Barang sudah di update');
         }
-        return redirect('/')->with('failed', 'Item not found!');
+        return redirect('/')->with('failed', 'Barang tidak ditemukan!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $item = HomeModel::find($id);
 
         if (!$item) {
-            return redirect('/')->with('error', 'Item tidak ditemukan');
+            return redirect('/')->with('error', 'Item tidak ditemukan!');
         }
 
-        // Hapus item dari database
         $item->delete();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Barang berhasil dihapus');
     }
 }
