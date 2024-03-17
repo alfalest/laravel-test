@@ -24,7 +24,7 @@
      <div class="container">
          <div class="row">
              {{-- NAVIGATION --}}
-             <nav class="navbar navbar-expand-lg bg-body-tertiary">
+             <nav class="navbar navbar-expand-lg bg-white">
                  <div class="container-fluid">
                      <a class="navbar-brand" href="#">Laravel Test</a>
                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

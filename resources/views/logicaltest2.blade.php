@@ -45,30 +45,34 @@
             </nav>
 
             {{-- CONTENT --}}
-            <h2 class="text-center mt-5">Anagram Checker</h2>
-            <form action="{{ route('test1') }}" method="post">
+            <h2 class="text-center mt-5">Mencari Huruf Terbanyak</h2>
+            <form action="{{ route('test2') }}" method="post">
                 @csrf
-                <label for="word1" class="form-label">Kata 1:</label>
-                <input type="text" id="word1" name="word1" class="form-control"><br><br>
-                <label for="word2" class="form-label">Kata 2:</label>
-                <input type="text" id="word2" name="word2" class="form-control"><br><br>
-                <button type="submit" class="btn btn-outline-dark text-center">Cek Kata</button>
+                <label for="sentence" class="form-label">Kalimat:</label>
+                <input type="text" id="sentence" name="sentence" class="form-control"><br><br>
+                <button type="submit" class="btn btn-outline-dark text-center">Cari Huruf Terbanyak</button>
             </form>
-            @isset($isAnagram)
-                <h3 class="text-center mt-5">Hasil Test</h3>
-                @if ($isAnagram)
-                    <div class="alert alert-success border-0 shadow-sm" role="alert">
-                        <h4 class="text-center text-success">True : Kata Sesuai!</h4>
-                    </div>
-                @else
-                    <div class="alert alert-danger border-0 shadow-sm" role="alert">
-                        <h4 class="text-center text-danger">False : Anagram Tidak Sesuai</h4>
-                    </div>
-                @endif
+            @isset($mostFrequentLetter)
+                <h3 class="text-center mt-5">Hasil</h3>
+                <div class="alert alert-dark border-0 shadow-sm" role="alert">
+                    <p class="text-center fs-5">Huruf <strong>{{ $mostFrequentLetter }}</strong> muncul sebanyak
+                        {{ $maxCount }}
+                        kali</p>
+                </div>
             @endisset
-            <div class=" text-end mt-5">
-                <a href="/logical-test-2" class="btn btn-outline-dark">Pergi ke Test 2 &nbsp;<i
-                        class="bi bi-arrow-right-circle-fill"></i></a>
+            <div class="row">
+                <div class="col-6">
+                    <div class=" text-start mt-5">
+                        <a href="/logical-test" class="btn btn-outline-dark">Pergi ke Test 1 &nbsp;<i
+                                class="bi bi-arrow-right-circle-fill"></i></a>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class=" text-end mt-5">
+                        <a href="/logical-test-3" class="btn btn-outline-dark">Pergi ke Test 3 &nbsp;<i
+                                class="bi bi-arrow-right-circle-fill"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

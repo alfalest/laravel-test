@@ -45,29 +45,30 @@
             </nav>
 
             {{-- CONTENT --}}
-            <h2 class="text-center mt-5">Anagram Checker</h2>
-            <form action="{{ route('test1') }}" method="post">
+            <h2 class="text-center mt-5">Generated Array</h2>
+            <form action="{{ route('test3') }}" method="post">
                 @csrf
-                <label for="word1" class="form-label">Kata 1:</label>
-                <input type="text" id="word1" name="word1" class="form-control"><br><br>
-                <label for="word2" class="form-label">Kata 2:</label>
-                <input type="text" id="word2" name="word2" class="form-control"><br><br>
-                <button type="submit" class="btn btn-outline-dark text-center">Cek Kata</button>
+                <label for="size" class="form-label">Input:</label>
+                <input type="number" id="size" name="size" class="form-control"><br><br>
+                <button type="submit" class="btn btn-outline-dark text-center">Generate Array</button>
             </form>
-            @isset($isAnagram)
-                <h3 class="text-center mt-5">Hasil Test</h3>
-                @if ($isAnagram)
-                    <div class="alert alert-success border-0 shadow-sm" role="alert">
-                        <h4 class="text-center text-success">True : Kata Sesuai!</h4>
-                    </div>
-                @else
-                    <div class="alert alert-danger border-0 shadow-sm" role="alert">
-                        <h4 class="text-center text-danger">False : Anagram Tidak Sesuai</h4>
-                    </div>
-                @endif
+
+            @isset($array)
+                Output :
+                <table class="table">
+                    @foreach ($array as $row)
+                        <tr>
+                            @foreach ($row as $cell)
+                                <td>{{ $cell }}</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </table>
             @endisset
-            <div class=" text-end mt-5">
-                <a href="/logical-test-2" class="btn btn-outline-dark">Pergi ke Test 2 &nbsp;<i
+
+
+            <div class="text-end mt-5">
+                <a href="/" class="btn btn-outline-dark">Homepage &nbsp;<i
                         class="bi bi-arrow-right-circle-fill"></i></a>
             </div>
         </div>
